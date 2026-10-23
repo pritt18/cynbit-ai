@@ -104,8 +104,8 @@ cynbit-ai-opportunity/
 
 ### 2. Clone Repository & Install Dependencies
 ```bash
-git clone https://github.com/pritt18/cynbit-ai-opportunity.git
-cd cynbit-ai-opportunity
+git clone https://github.com/pritt18/cynbit-ai.git
+cd cynbit-ai
 pip install -r requirements.txt
 ```
 

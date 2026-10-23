@@ -3,7 +3,7 @@
 **Role:** AI/ML Engineer Intern  
 **Company:** Cynbit Technologies Private Limited (`cynbit.in`)  
 **Candidate:** Pritam Gangurde  
-**Repository:** [github.com/pritt18/cynbit-ai-opportunity](https://github.com/pritt18/cynbit-ai-opportunity)  
+**Repository:** [github.com/pritt18/cynbit-ai](https://github.com/pritt18/cynbit-ai)  
 
 ---
 
@@ -11,7 +11,7 @@
 
 ### Field 1: Primary Deliverable Link (GitHub Repo / Document Link) *
 ```text
-https://github.com/pritt18/cynbit-ai-opportunity
+https://github.com/pritt18/cynbit-ai
 ```
 *(Alternative: If submitting via Google Drive or Zip, link to your uploaded folder or project archive)*
 
@@ -20,19 +20,19 @@ https://github.com/pritt18/cynbit-ai-opportunity
 ### Field 2: Additional Deliverable Links (Optional)
 - **Link 1 (Google Colab Interactive Notebook):**
   ```text
-  https://github.com/pritt18/cynbit-ai-opportunity/blob/main/notebooks/cynbit_revio_poc.ipynb
+  https://github.com/pritt18/cynbit-ai/blob/main/notebooks/cynbit_revio_poc.ipynb
   ```
 - **Link 2 (AI Opportunity Strategic Report):**
   ```text
-  https://github.com/pritt18/cynbit-ai-opportunity/blob/main/reports/01_AI_OPPORTUNITY_REPORT.md
+  https://github.com/pritt18/cynbit-ai/blob/main/reports/01_AI_OPPORTUNITY_REPORT.md
   ```
 - **Link 3 (Technical Approach & Architecture Report):**
   ```text
-  https://github.com/pritt18/cynbit-ai-opportunity/blob/main/reports/02_TECHNICAL_APPROACH_REPORT.md
+  https://github.com/pritt18/cynbit-ai/blob/main/reports/02_TECHNICAL_APPROACH_REPORT.md
   ```
 - **Link 4 (Processed Dataset & Evaluation Metrics):**
   ```text
-  https://github.com/pritt18/cynbit-ai-opportunity/blob/main/data/analyzed_reviews.csv
+  https://github.com/pritt18/cynbit-ai/blob/main/data/analyzed_reviews.csv
   ```
 
 ---
@@ -61,8 +61,8 @@ DELIVERABLES DELIVERED:
 
 SETUP & VERIFICATION COMMANDS:
 1. Clone & Install:
-   git clone https://github.com/pritt18/cynbit-ai-opportunity.git
-   cd cynbit-ai-opportunity
+   git clone https://github.com/pritt18/cynbit-ai.git
+   cd cynbit-ai
    pip install -r requirements.txt
 2. Run Automated Pytest Suite:
    pytest tests/test_engine.py -v
