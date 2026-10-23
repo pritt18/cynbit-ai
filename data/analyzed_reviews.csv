@@ -1,0 +1,121 @@
+review_id,platform,author,rating,review_text,overall_sentiment,sentiment_score,aspects_breakdown,urgency_score,is_crisis,crisis_tags,churn_risk,sla_recommendation,action_item,suggested_response,human_review_required
+REV-1001,G2,Sarah Jenkins,5,Revio completely streamlined our multi-location Google review monitoring. The automated alerts are instantaneous and our team responded 4x faster.,Positive,0.732,Customer Support: Positive (Customer Success & Ops),0,False,,Low,Tier-4 Automated: Instant / Automated Brand Response,"Acknowledge review, reinforce brand advocacy, and invite for case study or testimonial.","Hi Sarah Jenkins!
+
+Thank you so much for the 5-star review! We are thrilled to hear that you had such a great experience with us especially regarding our customer support. Our team works hard to deliver world-class digital experiences, and reviews like yours make our day!
+
+If you ever need anything or have ideas for new features, we are always here for you.
+
+Warmest regards,
+The Cynbit Customer Experience Team",False
+REV-1002,Trustpilot,Marcus Vance,1,Unacceptable server outage during our holiday marketing campaign. Your dashboard was unreachable for 4 hours and support took 2 days to reply. We are considering terminating our enterprise contract immediately.,Negative,-0.834,Customer Support: Negative (Customer Success & Ops); System Reliability & Performance: Negative (Core Infrastructure & DevOps); Product Quality & Features: Negative (Product & Engineering),100,True,"Severe Outage / Data Loss, Severe Dissatisfaction",High,Tier-1 Critical: < 1 Hour (Executive & Legal Escalation),"Immediate incident dispatch to Product & Engineering, Customer Success & Ops, Core Infrastructure & DevOps team.","Hello Marcus Vance,
+
+Thank you for bringing this critical matter to our immediate attention. We take feedback concerning Customer Support, System Reliability & Performance, Product Quality & Features with the utmost gravity, and our leadership team has already opened an expedited review.
+
+To ensure this is resolved without further delay, please contact our senior management directly at priority@cynbit.in referencing Ticket #REV-1002. We are committed to making this right.
+
+Warm regards,
+The Cynbit Customer Experience Team",True
+REV-1003,Google Reviews,Priya Sharma,2,"The maintenance ticket feature in TenantEase is full of bugs. I logged an urgent water leakage 3 days ago, and the landlord app showed no notification. Fix your notification delivery!",Negative,-0.38,Customer Support: Negative (Customer Success & Ops); System Reliability & Performance: Negative (Core Infrastructure & DevOps); Product Quality & Features: Negative (Product & Engineering),40,False,,Medium,Tier-3 Normal: < 24 Hours (Standard Agent Workflow),"Notify Product & Engineering, Customer Success & Ops, Core Infrastructure & DevOps to review root cause ticket.","Hi Priya Sharma,
+
+Thank you for sharing your candid feedback. We are genuinely sorry to hear that your experience regarding our customer support fell short of your expectations. This is certainly not the standard we strive to deliver.
+
+Our engineering and support leads have been briefed on this issue. We would value the opportunity to review your account and resolve this directly. Please reach out to us at support@cynbit.in so we can investigate immediately.
+
+Best regards,
+The Cynbit Customer Experience Team",False
+REV-1004,App Store,David Miller,5,TenantEase made rent payments and lease renewal seamless. Love the automated rent reminders and receipt generation. Best property app we've used.,Positive,0.762,Product Quality & Features: Positive (Product & Engineering); Ease of Use & UX: Positive (Design & Product UX),0,False,,Low,Tier-4 Automated: Instant / Automated Brand Response,"Acknowledge review, reinforce brand advocacy, and invite for case study or testimonial.","Hi David Miller!
+
+Thank you so much for the 5-star review! We are thrilled to hear that you had such a great experience with us especially regarding our product quality & features. Our team works hard to deliver world-class digital experiences, and reviews like yours make our day!
+
+If you ever need anything or have ideas for new features, we are always here for you.
+
+Warmest regards,
+The Cynbit Customer Experience Team",False
+REV-1005,Clutch,Elena Rostova,5,"Cynbit's team developed our custom AI agent workflow within 6 weeks. The engineering quality, AWS cloud architecture, and communication were world-class.",Positive,0.322,Customer Support: Positive (Customer Success & Ops); Product Quality & Features: Neutral (Product & Engineering),0,False,,Low,Tier-4 Automated: Instant / Automated Brand Response,"Acknowledge review, reinforce brand advocacy, and invite for case study or testimonial.","Hi Elena Rostova!
+
+Thank you so much for the 5-star review! We are thrilled to hear that you had such a great experience with us especially regarding our customer support. Our team works hard to deliver world-class digital experiences, and reviews like yours make our day!
+
+If you ever need anything or have ideas for new features, we are always here for you.
+
+Warmest regards,
+The Cynbit Customer Experience Team",False
+REV-1006,Google Reviews,Rajiv Mehta,3,"The web app delivered was technically solid and fast, but the initial onboarding and milestone documentation were delayed. Pricing is slightly on the higher side.",Neutral,-0.067,Customer Support: Neutral (Customer Success & Ops); Pricing & Billing: Neutral (Finance & Billing); Product Quality & Features: Neutral (Product & Engineering),10,False,,Low,Tier-4 Automated: Instant / Automated Brand Response,Send standard automated brand-aligned courtesy response.,"Dear Rajiv Mehta,
+
+Thank you for taking the time to provide your feedback regarding our services. We continuously evaluate all customer input to refine our technology, operational workflows, and service delivery standards.
+
+Should you have additional details or suggestions to share, please feel free to reach out to our team at contact@cynbit.in.
+
+Sincerely,
+The Cynbit Customer Experience Team",False
+REV-1007,Capterra,Chloe Dupont,4,Great sentiment analysis accuracy and clean dashboard UI. Would love to see deeper WhatsApp integration for sending direct review request links.,Positive,0.762,Product Quality & Features: Positive (Product & Engineering); Ease of Use & UX: Positive (Design & Product UX),0,False,,Low,Tier-4 Automated: Instant / Automated Brand Response,"Acknowledge review, reinforce brand advocacy, and invite for case study or testimonial.","Hi Chloe Dupont!
+
+Thank you so much for the 5-star review! We are thrilled to hear that you had such a great experience with us especially regarding our product quality & features. Our team works hard to deliver world-class digital experiences, and reviews like yours make our day!
+
+If you ever need anything or have ideas for new features, we are always here for you.
+
+Warmest regards,
+The Cynbit Customer Experience Team",False
+REV-1008,Google Reviews,Amir Khan,1,Total scam. I was double-charged for my October maintenance fee and your payment gateway showed failed transaction. I want an immediate refund or I will file a bank chargeback.,Negative,-0.834,Pricing & Billing: Negative (Finance & Billing); System Reliability & Performance: Negative (Core Infrastructure & DevOps),100,True,"Legal / Fraud Risk, Billing Dispute",High,Tier-1 Critical: < 1 Hour (Executive & Legal Escalation),"Immediate incident dispatch to Finance & Billing, Core Infrastructure & DevOps team.","Hello Amir Khan,
+
+Thank you for bringing this critical matter to our immediate attention. We take feedback concerning Pricing & Billing, System Reliability & Performance with the utmost gravity, and our leadership team has already opened an expedited review.
+
+To ensure this is resolved without further delay, please contact our senior management directly at priority@cynbit.in referencing Ticket #REV-1008. We are committed to making this right.
+
+Warm regards,
+The Cynbit Customer Experience Team",True
+REV-1009,Trustpilot,Liam O'Connor,4,Solid platform for managing review velocity. Helps us gather customer feedback seamlessly. Customer support agent Neha was very helpful resolving our webhook issue.,Positive,0.462,Customer Support: Positive (Customer Success & Ops); Product Quality & Features: Positive (Product & Engineering),0,False,,Low,Tier-4 Automated: Instant / Automated Brand Response,"Acknowledge review, reinforce brand advocacy, and invite for case study or testimonial.","Hi Liam O'Connor!
+
+Thank you so much for the 5-star review! We are thrilled to hear that you had such a great experience with us especially regarding our customer support. Our team works hard to deliver world-class digital experiences, and reviews like yours make our day!
+
+If you ever need anything or have ideas for new features, we are always here for you.
+
+Warmest regards,
+The Cynbit Customer Experience Team",False
+REV-1010,Clutch,Vikram Singhania,5,Outstanding autonomous AI agent integration! Cynbit transformed our manual customer triage into an automated 24/7 intelligent pipeline. High ROI.,Positive,0.322,Customer Support: Positive (Customer Success & Ops); Pricing & Billing: Neutral (Finance & Billing); Product Quality & Features: Positive (Product & Engineering),0,False,,Low,Tier-4 Automated: Instant / Automated Brand Response,"Acknowledge review, reinforce brand advocacy, and invite for case study or testimonial.","Hi Vikram Singhania!
+
+Thank you so much for the 5-star review! We are thrilled to hear that you had such a great experience with us especially regarding our customer support. Our team works hard to deliver world-class digital experiences, and reviews like yours make our day!
+
+If you ever need anything or have ideas for new features, we are always here for you.
+
+Warmest regards,
+The Cynbit Customer Experience Team",False
+REV-1011,G2,Jessica Taylor,2,The AI auto-response feature is too robotic and repeats the exact same phrases. It doesn't capture nuanced feedback about pricing dissatisfaction. Needs better prompt controls.,Negative,-0.38,Pricing & Billing: Neutral (Finance & Billing); Product Quality & Features: Negative (Product & Engineering),40,False,,Medium,Tier-3 Normal: < 24 Hours (Standard Agent Workflow),Notify Product & Engineering to review root cause ticket.,"Hi Jessica Taylor,
+
+Thank you for sharing your candid feedback. We are genuinely sorry to hear that your experience regarding our product quality & features fell short of your expectations. This is certainly not the standard we strive to deliver.
+
+Our engineering and support leads have been briefed on this issue. We would value the opportunity to review your account and resolve this directly. Please reach out to us at support@cynbit.in so we can investigate immediately.
+
+Best regards,
+The Cynbit Customer Experience Team",False
+REV-1012,App Store,Carlos Gomez,4,"Smooth UI and easy lease document signing. Sometimes takes a few seconds to load floor plans, but overall great experience.",Positive,0.762,System Reliability & Performance: Positive (Core Infrastructure & DevOps); Product Quality & Features: Positive (Product & Engineering); Ease of Use & UX: Positive (Design & Product UX),0,False,,Low,Tier-4 Automated: Instant / Automated Brand Response,"Acknowledge review, reinforce brand advocacy, and invite for case study or testimonial.","Hi Carlos Gomez!
+
+Thank you so much for the 5-star review! We are thrilled to hear that you had such a great experience with us especially regarding our system reliability & performance. Our team works hard to deliver world-class digital experiences, and reviews like yours make our day!
+
+If you ever need anything or have ideas for new features, we are always here for you.
+
+Warmest regards,
+The Cynbit Customer Experience Team",False
+REV-1013,Google Reviews,Deepak Verma,1,Security issue! Our staging database credentials were leaked in the public git repository during their early deployment test. Unacceptable lack of basic security protocols.,Negative,-0.38,System Reliability & Performance: Neutral (Core Infrastructure & DevOps),100,True,"Security Threat, Severe Dissatisfaction",High,Tier-1 Critical: < 1 Hour (Executive & Legal Escalation),Immediate incident dispatch to Core Infrastructure & DevOps team.,"Hello Deepak Verma,
+
+Thank you for bringing this critical matter to our immediate attention. We take feedback raised with the utmost gravity, and our leadership team has already opened an expedited review.
+
+To ensure this is resolved without further delay, please contact our senior management directly at priority@cynbit.in referencing Ticket #REV-1013. We are committed to making this right.
+
+Warm regards,
+The Cynbit Customer Experience Team",True
+REV-1014,ProductHunt,Ananya Roy,5,Incredible time saver for agencies handling 20+ client profiles. The multi-tenant workspace and review sentiment aggregator are top-notch.,Positive,0.322,,0,False,,Low,Tier-4 Automated: Instant / Automated Brand Response,Send standard automated brand-aligned courtesy response.,"Hi Ananya Roy!
+
+Thank you so much for the 5-star review! We are thrilled to hear that you had such a great experience with us. Our team works hard to deliver world-class digital experiences, and reviews like yours make our day!
+
+If you ever need anything or have ideas for new features, we are always here for you.
+
+Warmest regards,
+The Cynbit Customer Experience Team",False
+REV-1015,Google Reviews,Emily Watson,3,"Decent app for paying rent, but customer service chatbot cannot resolve simple parking allocation questions and keeps looping.",Negative,-0.38,Customer Support: Negative (Customer Success & Ops); Product Quality & Features: Negative (Product & Engineering); Ease of Use & UX: Negative (Design & Product UX),25,False,,Medium,Tier-4 Automated: Instant / Automated Brand Response,"Notify Design & Product UX, Product & Engineering, Customer Success & Ops to review root cause ticket.","Hi Emily Watson,
+
+Thank you for sharing your candid feedback. We are genuinely sorry to hear that your experience regarding our customer support fell short of your expectations. This is certainly not the standard we strive to deliver.
+
+Our engineering and support leads have been briefed on this issue. We would value the opportunity to review your account and resolve this directly. Please reach out to us at support@cynbit.in so we can investigate immediately.
+
+Best regards,
+The Cynbit Customer Experience Team",False
