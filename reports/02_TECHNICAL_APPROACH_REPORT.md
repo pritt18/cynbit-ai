@@ -1,16 +1,15 @@
 # ⚙️ Technical Approach Report: Revio-Intelligence Architecture
 
-**Candidate:** Pritam Gangurde  
-**Role:** AI/ML Engineer Intern  
-**Company Assessed:** Cynbit Technologies Private Limited (`cynbit.in`)  
-**Document:** Deliverable 3 — Technical Approach, Model Selection, Data Pipeline & Architecture  
+**Author:** Pritam Gangurde  
+**Specialization:** AI/ML Engineering  
+**System:** Revio Intelligence Multi-Tiered Architecture  
 **Date:** October 2026  
 
 ---
 
 ## 1. System Architecture & High-Level Design
 
-The **Revio-Intelligence Engine** is engineered as a high-throughput, microservices-ready AI intelligence layer designed to integrate directly with Cynbit's proprietary SaaS platform (**Revio**) and its client-facing CRM/omnichannel pipelines.
+The **Revio-Intelligence Engine** is engineered as a high-throughput, microservices-ready AI intelligence layer designed to integrate directly with multi-tenant SaaS platforms and client-facing CRM/omnichannel pipelines.
 
 ### End-to-End System Data Flow
 
@@ -19,7 +18,7 @@ flowchart TD
     subgraph INGESTION["1. Omnichannel Ingestion Layer"]
         A1["Google Business Profile Webhook"]
         A2["Trustpilot / G2 Webhooks"]
-        A3["App Store / TenantEase Reviews"]
+        A3["App Store / Mobile Reviews"]
         A4["Batch CSV / REST API Ingestion"]
     end
 
@@ -58,12 +57,12 @@ A common pitfall in modern AI engineering is over-reliance on slow, expensive cl
 
 | Architectural Tier | Model Candidate | Primary Task | Latency | Cost per 10K Reviews | Selected Strategy |
 | :--- | :--- | :--- | :---: | :---: | :--- |
-| **Tier 1: High-Speed Edge / Heuristic Filter** | Fast Lexicon Tokenizer & Regex Automata | Immediate crisis keyword scanning, clause contrastive splitting, baseline valence | **< 2ms** | **$0.00** | **Active in PoC**: Guarantees zero latency and 100% offline uptime. |
-| **Tier 2: Aspect-Based Sentiment Mining** | Fine-tuned `DeBERTa-v3-small` / `BART-MNLI` Zero-Shot | Aspect-sentence cross-attention, granular polarity scoring (-1.0 to +1.0) | **15–25ms** (CPU/GPU) | **~$0.12** (Compute) | **PoC Hybrid**: Fast rule-based ABSA with seamless hook for DeBERTa ONNX runtime. |
+| **Tier 1: High-Speed Edge / Heuristic Filter** | Fast Lexicon Tokenizer & Regex Automata | Immediate crisis keyword scanning, clause contrastive splitting, baseline valence | **< 2ms** | **$0.00** | **Deterministic Core**: Guarantees zero latency and 100% offline uptime. |
+| **Tier 2: Aspect-Based Sentiment Mining** | Fine-tuned `DeBERTa-v3-small` / `BART-MNLI` Zero-Shot | Aspect-sentence cross-attention, granular polarity scoring (-1.0 to +1.0) | **15–25ms** (CPU/GPU) | **~$0.12** (Compute) | **Hybrid Core**: Fast rule-based ABSA with seamless hook for DeBERTa ONNX runtime. |
 | **Tier 3: Contextual Brand Response Generator** | Llama-3-8B-Instruct (via Groq) / Claude 3.5 Sonnet / OpenAI GPT-4o-mini | Tone-matched public response drafting with dynamic brand persona injection | **300–600ms** | **~$0.60** | **Pluggable Engine**: Deterministic template synthesizer with direct LLM API adapter. |
 
 ### Architectural Tradeoff Rationale:
-1. **Zero Cold-Start Latency:** By implementing the core ABSA and Crisis engine in clean Python with vector-optimized math (`math.tanh`, compiled regex automata), reviews are processed in under 5ms, allowing Revio to handle thousands of concurrent webhook events without expensive GPU clusters.
+1. **Zero Cold-Start Latency:** By implementing the core ABSA and Crisis engine in clean Python with vector-optimized math (`math.tanh`, compiled regex automata), reviews are processed in under 5ms, allowing the system to handle thousands of concurrent webhook events without expensive GPU clusters.
 2. **Defensive Governance:** Generative LLMs can hallucinate or make legally binding admissions (e.g., admitting fault in a public data breach). Our architecture enforces strict **deterministic guardrails** that intercept any critical trigger before generation occurs.
 
 ---
@@ -133,7 +132,7 @@ Responses are dynamically generated using four brand voice archetypes:
 1. **Empathetic & Resolution-Oriented:** For negative reviews with specific feature/support pain points. Acknowledges emotion, avoids defensive language, and provides a direct path to resolution.
 2. **Corporate & Professional:** For neutral or enterprise-tier inquiries. Clear, concise, and structured.
 3. **Warm & Enthusiastic:** For 5-star positive testimonials. Celebrates customer advocacy and reinforces brand loyalty.
-4. **Executive Priority Escalation:** For critical incidents ($U \ge 70$). Professional ownership, strict neutral phrasing, avoids admitting premature legal liability, and routes to `priority@cynbit.in`.
+4. **Executive Priority Escalation:** For critical incidents ($U \ge 70$). Professional ownership, strict neutral phrasing, avoids admitting premature legal liability, and routes to `priority@revio-intel.ai`.
 
 ### 5.2 Safety Guardrails & Human-in-the-Loop Protocol
 ```
@@ -148,7 +147,7 @@ Responses are dynamically generated using four brand voice archetypes:
     ┌────┴──────────────────────────┐
     ▼                               ▼
 [Safe]                     [Human Review Required]
-Auto-publish to G2/Google   Held in Revio Moderation Queue
+Auto-publish to G2/Google   Held in Moderation Queue
                             Internal Ticket sent to Slack
 ```
 
@@ -156,16 +155,16 @@ Auto-publish to G2/Google   Held in Revio Moderation Queue
 
 ## 6. Execution Plan & Production Deployment on AWS/Azure
 
-As Cynbit specializes in AWS and Azure cloud architectures, the Revio-Intelligence Engine is architected for zero-friction containerized deployment:
+The Revio-Intelligence Engine is architected for zero-friction containerized deployment on cloud infrastructure:
 
 ```mermaid
 flowchart LR
     subgraph CLIENT["Client Endpoints"]
-        UI["Revio Dashboard (React/Streamlit)"]
+        UI["Review Dashboard (React/Streamlit)"]
         WEBHOOK["Review Webhooks (Google/G2/Trustpilot)"]
     end
 
-    subgraph CLOUD["Cynbit Cloud Infrastructure (AWS / Azure)"]
+    subgraph CLOUD["Cloud Infrastructure (AWS / Azure)"]
         ALB["Application Load Balancer"]
         API["FastAPI Cluster (ECS Fargate / Docker)"]
         REDIS["Redis Broker & Celery Queue"]
@@ -181,10 +180,7 @@ flowchart LR
 ```
 
 ### Production Milestone Roadmap:
-- **Week 1–2 (Containerization & Ingestion):** Package FastAPI backend into Docker image; deploy to AWS ECS Fargate with auto-scaling (1 to 10 tasks based on CPU/Request count).
-- **Week 3–4 (Database Integration):** Connect Revio's multi-tenant PostgreSQL schema (`tenants`, `reviews`, `aspect_scores`, `escalation_tickets`).
-- **Week 5–6 (Webhook Connectors):** Implement OAuth2 and Webhook sync for Google Business Profile, Trustpilot, G2, and TenantEase internal ticketing.
-- **Week 7–8 (Enterprise SLA & Observability):** Deploy Prometheus and Grafana dashboards tracking review sentiment drift, mean time to resolve (MTTR) for high-urgency incidents, and response generation throughput.
-
----
-*Technical Approach Document prepared by Pritam Gangurde for Cynbit Technologies Private Limited.*
+- **Phase 1 (Containerization & Ingestion):** Package FastAPI backend into Docker image; deploy to AWS ECS Fargate with auto-scaling (1 to 10 tasks based on CPU/Request count).
+- **Phase 2 (Database Integration):** Connect multi-tenant PostgreSQL schema (`tenants`, `reviews`, `aspect_scores`, `escalation_tickets`).
+- **Phase 3 (Webhook Connectors):** Implement OAuth2 and Webhook sync for Google Business Profile, Trustpilot, and G2.
+- **Phase 4 (Enterprise SLA & Observability):** Deploy Prometheus and Grafana dashboards tracking review sentiment drift, mean time to resolve (MTTR) for high-urgency incidents, and response generation throughput.

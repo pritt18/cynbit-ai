@@ -1,7 +1,6 @@
 """
 Revio-Intelligence REST API: Production-grade FastAPI endpoints.
-Built for Cynbit Technologies - AI Opportunity Proof of Concept.
-Author: Pritam Gangurde (pritt18)
+Aspect-Based Sentiment Mining, Churn/Crisis Early Warning & Autonomous Response Engine.
 """
 
 import sys
@@ -22,7 +21,7 @@ from src.generator import BrandResponseGenerator, GeneratedResponse
 
 # Initialize FastAPI App
 app = FastAPI(
-    title="Cynbit Revio-Intelligence API",
+    title="Revio-Intelligence API",
     description="Aspect-Based Sentiment Mining, Churn/Crisis Early Warning & Autonomous Response Engine",
     version="1.0.0",
     docs_url="/docs",
@@ -100,7 +99,7 @@ class GenerateResponseRequest(BaseModel):
     author: Optional[str] = "Anonymous"
     platform: Optional[str] = "Google Reviews"
     preferred_tone: Optional[str] = None
-    sign_off_name: Optional[str] = "The Cynbit Customer Experience Team"
+    sign_off_name: Optional[str] = "The Customer Experience Team"
 
 
 class GenerateResponseOutput(BaseModel):
@@ -117,10 +116,9 @@ class GenerateResponseOutput(BaseModel):
 def root_info():
     """System metadata and API service health."""
     return {
-        "service": "Cynbit Revio-Intelligence API",
+        "service": "Revio-Intelligence API",
         "status": "online",
         "version": "1.0.0",
-        "author": "Pritam Gangurde",
         "endpoints": {
             "docs": "/docs",
             "single_analysis": "/api/v1/analyze",
@@ -216,7 +214,7 @@ def generate_brand_response(payload: GenerateResponseRequest):
         resp = generator.generate(
             analysis=analysis,
             preferred_tone=payload.preferred_tone,
-            sign_off_name=payload.sign_off_name or "The Cynbit Customer Experience Team"
+            sign_off_name=payload.sign_off_name or "The Customer Experience Team"
         )
         return GenerateResponseOutput(**asdict(resp))
     except Exception as e:

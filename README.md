@@ -1,7 +1,5 @@
-# ⚡ Cynbit Revio-Intelligence Engine
-> **AI/ML Engineer Assessment — Phase 2 Practical Challenge**  
-> **Candidate:** Pritam Gangurde (`pritt18`)  
-> **Target Platform:** Cynbit Technologies Private Limited (`cynbit.in`) — Revio SaaS  
+# ⚡ Revio Intelligence Engine
+> **Enterprise Omnichannel Customer Experience, Aspect-Based Sentiment Mining & Autonomous Response Platform**
 
 [![Tests](https://img.shields.io/badge/pytest-8%2F8%20passed-brightgreen.svg)]()
 [![FastAPI](https://img.shields.io/badge/FastAPI-v1.0.0-blue.svg)]()
@@ -12,12 +10,12 @@
 
 ## 📌 Executive Overview
 
-This repository contains the complete submission for the **Cynbit AI/ML Engineer Intern Assessment**. 
+**Revio Intelligence** is an enterprise-grade AI engine designed to bridge the gap between customer feedback collection and automated operational action. 
 
-After evaluating Cynbit Technologies' core operations—encompassing AI automation, cloud engineering, and proprietary SaaS products (**Revio**, **TenantEase**, and **BitElevate**)—this project delivers **Revio-Intelligence**: an end-to-end, enterprise-ready **Aspect-Based Sentiment Mining, Churn/Crisis Early Warning, and Autonomous Brand-Aligned Response Engine**.
+Operating across omnichannel review sources (Google Reviews, Trustpilot, G2, App Store, and internal CRM portals), the system deconstructs customer sentiment into actionable departmental insights, predicts churn risks, flags high-severity reputation crises in real time, and synthesizes brand-compliant responses.
 
-### Core Problem Solved
-Traditional reputation management platforms offer only aggregate star ratings and superficial positive/negative flags. When an enterprise customer experiences a critical issue (e.g. server outage during a marketing campaign, payment double-charge, or database credential leak), the feedback is buried in unread queues until public damage is done. Furthermore, existing automated replies sound repetitive and robotic.
+### The Problem
+Traditional reputation management platforms offer only aggregate star ratings and superficial positive/negative tags. When an enterprise customer experiences a critical issue (e.g. server outage during a marketing campaign, payment double-charge, or database credential leak), the feedback is buried in unread queues until public damage is done. Furthermore, existing automated replies sound repetitive and robotic.
 
 ### The Revio-Intelligence Solution
 1. **Aspect-Based Sentiment Analysis (ABSA):** Decomposes complex compound reviews across five operational business dimensions (*Customer Support*, *Pricing & Billing*, *System Reliability*, *Product Features*, and *Ease of Use*).
@@ -34,7 +32,7 @@ flowchart TD
     subgraph INGESTION["1. Omnichannel Ingestion Layer"]
         A1["Google Reviews Webhook"]
         A2["Trustpilot & G2 Reviews"]
-        A3["App Store / TenantEase Feedback"]
+        A3["App Store / Mobile Feedback"]
         A4["Batch CSV / REST API Payload"]
     end
 
@@ -70,11 +68,11 @@ flowchart TD
 ## 📁 Repository Structure
 
 ```
-cynbit-ai-opportunity/
+cynbit-ai/
 ├── reports/
-│   ├── 01_AI_OPPORTUNITY_REPORT.md       # Deliverable 1: Strategic Industry & Opportunity Analysis
-│   ├── 02_TECHNICAL_APPROACH_REPORT.md   # Deliverable 3: Technical Approach, Models & Pipelines
-│   └── 03_SUBMISSION_NOTES.md            # Deliverable 4: Submission links & Execution Notes
+│   ├── 01_AI_OPPORTUNITY_REPORT.md       # Strategic Industry & Opportunity Analysis
+│   ├── 02_TECHNICAL_APPROACH_REPORT.md   # Technical Approach, Models & Pipelines
+│   └── 03_SUBMISSION_NOTES.md            # Architecture & Verification Notes
 ├── src/
 │   ├── __init__.py
 │   ├── engine.py                         # Core ABSA, Sentiment & Crisis Risk Engine
@@ -123,7 +121,7 @@ Open your browser at `http://localhost:8501` to test:
 - **Single Review Diagnostic:** Live aspect inspector, urgency gauge, and dynamic response studio.
 - **Batch Omnichannel Intelligence:** Interactive charts comparing sentiment across Google, Trustpilot, G2, and App Store.
 - **Crisis Escalation Matrix:** Triage queue for high-risk reviews requiring human approval.
-- **Cynbit Business Synergy:** Strategic integration breakdown.
+- **System Synergy & Architecture:** Strategic integration breakdown.
 
 ### 5. Launch FastAPI REST Service
 ```bash
@@ -205,7 +203,7 @@ POST /api/v1/generate-response
 Content-Type: application/json
 
 {
-  "review_text": "Cynbit's team developed our custom AI agent workflow within 6 weeks. The engineering quality and cloud architecture were world-class.",
+  "review_text": "The engineering team developed our custom AI agent workflow within 6 weeks. The software quality and cloud architecture were world-class.",
   "review_id": "REV-1005",
   "rating": 5,
   "author": "Elena Rostova",
@@ -224,10 +222,8 @@ Evaluated on the omnichannel benchmark dataset (`data/sample_reviews.csv`):
 
 ---
 
-## 👤 Author & Assessment Submission
+## 👤 Project & Author Information
 
-- **Candidate:** Pritam Gangurde  
+- **Author:** Pritam Gangurde  
 - **GitHub:** [@pritt18](https://github.com/pritt18)  
 - **Email:** pritamgangurde18@gmail.com  
-- **Submission Date:** October 2026  
-- **Target Firm:** Cynbit Technologies Private Limited  

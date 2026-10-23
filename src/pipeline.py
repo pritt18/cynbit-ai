@@ -1,7 +1,6 @@
 """
 Revio-Intelligence Pipeline: CLI / Batch execution pipeline.
-Built for Cynbit Technologies - AI Opportunity Proof of Concept.
-Author: Pritam Gangurde (pritt18)
+Aspect-Based Sentiment Mining & Autonomous Response Generation.
 """
 
 import sys
@@ -88,7 +87,7 @@ def run_batch_pipeline(input_csv: str, output_csv: str):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Cynbit Revio-Intelligence Batch CLI")
+    parser = argparse.ArgumentParser(description="Revio-Intelligence Batch CLI")
     parser.add_argument("--input", default=str(PROJECT_ROOT / "data" / "sample_reviews.csv"), help="Input CSV path")
     parser.add_argument("--output", default=str(PROJECT_ROOT / "data" / "analyzed_reviews.csv"), help="Output CSV path")
     args = parser.parse_args()

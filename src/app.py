@@ -1,7 +1,6 @@
 """
 Revio-Intelligence Dashboard: Interactive Streamlit Web Application.
-Built for Cynbit Technologies - AI Opportunity Proof of Concept.
-Author: Pritam Gangurde (pritt18)
+Aspect-Based Sentiment Mining, Churn/Crisis Early Warning & Autonomous Response Engine.
 """
 
 import sys
@@ -19,7 +18,7 @@ from src.generator import BrandResponseGenerator
 
 # Page Configuration
 st.set_page_config(
-    page_title="Cynbit Revio-Intelligence | AI Opportunity PoC",
+    page_title="Revio Intelligence | Enterprise CX & Crisis Engine",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -110,8 +109,8 @@ PRESETS = {
         "author": "Amir Khan",
         "platform": "Google Reviews"
     },
-    "3. Positive Autonomous Agent Praise (Cynbit Services)": {
-        "text": "Outstanding autonomous AI agent integration! Cynbit transformed our manual customer triage into an automated 24/7 intelligent pipeline. High ROI and smooth delivery.",
+    "3. Positive Autonomous Agent Praise (Enterprise Client)": {
+        "text": "Outstanding autonomous AI agent integration! The team transformed our manual customer triage into an automated 24/7 intelligent pipeline. High ROI and smooth delivery.",
         "rating": 5,
         "author": "Vikram Singhania",
         "platform": "Clutch"
@@ -132,9 +131,9 @@ PRESETS = {
 
 # Sidebar
 with st.sidebar:
-    st.image("https://cynbit.in/assets/logo-Cynbit.png", width=180) if False else st.markdown("### ⚡ CYNBIT TECHNOLOGIES")
-    st.markdown("**AI/ML Engineer Assessment Deliverable**")
-    st.markdown("*Revio-Intelligence: Aspect Sentiment & Crisis Engine*")
+    st.markdown("### ⚡ REVIO INTELLIGENCE")
+    st.markdown("**Enterprise CX & Crisis Platform**")
+    st.markdown("*Aspect Sentiment & Automated Response Engine*")
     st.markdown("---")
     st.markdown("### 🎯 Engine Capabilities")
     st.markdown("""
@@ -146,10 +145,10 @@ with st.sidebar:
     - **Departmental SLA Routing**
     """)
     st.markdown("---")
-    st.markdown("**Candidate:** Pritam Gangurde  \n**Role:** AI/ML Engineer Intern  \n**Status:** Completed PoC")
+    st.markdown("**Version:** v1.0.0 Enterprise  \n**Status:** Online & Active")
 
 # Main Header
-st.markdown('<div class="main-header">⚡ Cynbit Revio-Intelligence Engine</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-header">⚡ Revio Intelligence Engine</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-header">Aspect-Based Sentiment Mining, Churn/Crisis Early Warning & Autonomous Brand-Aligned Response Engine</div>', unsafe_allow_html=True)
 
 # Navigation Tabs
@@ -157,7 +156,7 @@ tab1, tab2, tab3, tab4 = st.tabs([
     "🔍 Single Review Diagnostic",
     "📊 Omnichannel Batch Intelligence",
     "🚨 Crisis Escalation Matrix",
-    "🏛️ Cynbit Synergy & Architecture"
+    "🏛️ System Synergy & Architecture"
 ])
 
 # ----------------- TAB 1: SINGLE REVIEW DIAGNOSTIC -----------------
@@ -200,7 +199,7 @@ with tab1:
             ["Auto-Select (Recommended)", "Empathetic & Resolution-Oriented", "Corporate & Professional", "Warm & Enthusiastic", "Executive Priority Escalation"]
         )
     with col_tone2:
-        sign_off = st.text_input("Brand Sign-off:", value="The Cynbit Customer Experience Team")
+        sign_off = st.text_input("Brand Sign-off:", value="The Customer Experience Team")
 
     if st.button("🚀 Run Intelligence Analysis", type="primary", use_container_width=True):
         tone_arg = None if preferred_tone == "Auto-Select (Recommended)" else preferred_tone
@@ -366,7 +365,7 @@ with tab3:
         {
             "Review ID": "REV-1013",
             "Platform": "Google Reviews",
-            "Product": "Cynbit IT Services",
+            "Product": "Cloud Infrastructure",
             "Trigger": "Security Threat (Credentials Leaked)",
             "Urgency": "95 / 100",
             "Assigned Department": "Core Infrastructure & DevOps",
@@ -396,18 +395,18 @@ with tab3:
     ]
 
     st.table(pd.DataFrame(urgent_cases))
-    st.info("💡 **Enterprise Workflow:** When an urgency score exceeds 75, Revio automatically routes an incident notification via Slack / PagerDuty / Webhook to the respective department head, preventing public reputation damage.")
+    st.info("💡 **Enterprise Workflow:** When an urgency score exceeds 75, the engine automatically routes an incident notification via Slack / PagerDuty / Webhook to the respective department head, preventing public reputation damage.")
 
 
 # ----------------- TAB 4: ARCHITECTURE & SYNERGY -----------------
 with tab4:
-    st.markdown("### 🏛️ Strategic Alignment: Cynbit Business Synergy & Architecture")
+    st.markdown("### 🏛️ Strategic Alignment: Business Synergy & Architecture")
 
     st.markdown("""
-    #### Why this solves Cynbit's Core Business Challenges:
-    1. **Supercharges Revio SaaS**: Turns basic star-rating monitoring into an enterprise-grade **Customer Experience Intelligence Engine**.
-    2. **Unifies Proprietary Products**: Solves feedback aggregation across **Revio**, **TenantEase** (maintenance ticketing insights), and **Cynbit IT Services**.
-    3. **High ROI for Cynbit Clients**: Reduces reputation triage time by **75%**, prevents customer churn with **real-time crisis alerts**, and ensures brand-compliant messaging.
+    #### Business Value & Revenue Defense:
+    1. **Supercharges SaaS Platforms**: Turns basic star-rating monitoring into an enterprise-grade **Customer Experience Intelligence Engine**.
+    2. **Omnichannel Feedback Aggregation**: Unifies customer signals across Google, Trustpilot, G2, App Store, and internal ticketing.
+    3. **High ROI & Churn Prevention**: Reduces reputation triage time by **75%**, prevents customer churn with **real-time crisis alerts**, and ensures brand-compliant messaging.
     """)
 
     st.markdown("#### System Architecture Flow")
@@ -434,4 +433,4 @@ with tab4:
     """, language="text")
 
 st.markdown("---")
-st.markdown("<center><small>Built with pride by <strong>Pritam Gangurde</strong> for Cynbit Technologies Assessment.</small></center>", unsafe_allow_html=True)
+st.markdown("<center><small>Revio Intelligence Platform | Aspect Sentiment Mining & Autonomous Response Engine</small></center>", unsafe_allow_html=True)

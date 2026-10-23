@@ -33,7 +33,7 @@ def api_client():
 
 
 def test_positive_review_sentiment(engine):
-    text = "Cynbit delivered exceptional AI agent software! Fast, reliable, and high ROI. Amazing work."
+    text = "The platform delivered exceptional AI agent software! Fast, reliable, and high ROI. Amazing work."
     analysis = engine.analyze_review(text, rating=5, author="John Doe", platform="Clutch")
     assert analysis.overall_sentiment == "Positive"
     assert analysis.sentiment_score > 0.3
@@ -80,7 +80,7 @@ def test_crisis_guardrail_enforcement(engine, generator):
     # Human review must be mandated for security/legal threats
     assert response.human_review_required is True
     assert response.tone == "Executive Priority Escalation"
-    assert "priority@cynbit.in" in response.response_text
+    assert "priority@revio-intel.ai" in response.response_text
 
 
 def test_api_health(api_client):
@@ -107,7 +107,7 @@ def test_api_analyze_endpoint(api_client):
 
 def test_api_generate_response_endpoint(api_client):
     payload = {
-        "review_text": "Outstanding work by Cynbit team on our custom LLM integration!",
+        "review_text": "Outstanding work by engineering team on our custom LLM integration!",
         "review_id": "TEST-102",
         "rating": 5,
         "author": "Bob",

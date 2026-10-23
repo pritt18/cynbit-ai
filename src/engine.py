@@ -1,7 +1,6 @@
 """
-Revio-Intelligence Engine: Core NLP, ABSA, and Crisis Detection Engine.
-Built for Cynbit Technologies - AI Opportunity Proof of Concept.
-Author: Pritam Gangurde (pritt18)
+Revio Intelligence Engine: Core NLP, ABSA, and Crisis Detection Engine.
+Aspect-Based Sentiment Mining, Urgency Scoring, and Churn Risk Modeling.
 """
 
 import re
@@ -118,7 +117,7 @@ class ReviewAnalysis:
 
 class RevioIntelligenceEngine:
     """
-    Advanced Sentiment & Crisis Intelligence Engine designed for Cynbit's Revio platform.
+    Advanced Sentiment & Crisis Intelligence Engine designed for multi-tenant SaaS platforms.
     Deconstructs reviews into Aspect-Based Sentiments, detects operational risks,
     and calculates urgency metrics.
     """

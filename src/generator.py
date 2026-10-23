@@ -1,7 +1,6 @@
 """
-Revio-Intelligence Generator: Brand-Aligned Contextual Response Engine.
-Built for Cynbit Technologies - AI Opportunity Proof of Concept.
-Author: Pritam Gangurde (pritt18)
+Revio Intelligence Generator: Brand-Aligned Contextual Response Engine.
+Context-aware response synthesis with safety guardrails and human-in-the-loop triggers.
 """
 
 import os
@@ -42,7 +41,7 @@ class BrandResponseGenerator:
         "Executive Priority Escalation"
     ]
 
-    def __init__(self, brand_name: str = "Cynbit / Revio"):
+    def __init__(self, brand_name: str = "Revio"):
         self.brand_name = brand_name
         self.groq_api_key = os.getenv("GROQ_API_KEY")
         self.openai_api_key = os.getenv("OPENAI_API_KEY")
@@ -51,7 +50,7 @@ class BrandResponseGenerator:
         self,
         analysis: ReviewAnalysis,
         preferred_tone: Optional[str] = None,
-        sign_off_name: str = "The Cynbit Customer Experience Team"
+        sign_off_name: str = "The Customer Experience Team"
     ) -> GeneratedResponse:
         """
         Generates a contextual response adhering to brand guidelines and safety checks.
@@ -125,7 +124,7 @@ class BrandResponseGenerator:
                 f"Thank you for bringing this critical matter to our immediate attention. We take feedback "
                 f"{aspect_mention} with the utmost gravity, and our leadership team has already opened an expedited review.\n\n"
                 f"To ensure this is resolved without further delay, please contact our senior management directly at "
-                f"priority@cynbit.in referencing Ticket #{analysis.review_id}. We are committed to making this right.\n\n"
+                f"priority@revio-intel.ai referencing Ticket #{analysis.review_id}. We are committed to making this right.\n\n"
                 f"Warm regards,\n{sign_off_name}"
             )
 
@@ -140,7 +139,7 @@ class BrandResponseGenerator:
                 f"Thank you for sharing your candid feedback. We are genuinely sorry to hear that your experience "
                 f"{issue_acknowledgment} fell short of your expectations. This is certainly not the standard we strive to deliver.\n\n"
                 f"Our engineering and support leads have been briefed on this issue. We would value the opportunity to review "
-                f"your account and resolve this directly. Please reach out to us at support@cynbit.in so we can investigate immediately.\n\n"
+                f"your account and resolve this directly. Please reach out to us at support@revio-intel.ai so we can investigate immediately.\n\n"
                 f"Best regards,\n{sign_off_name}"
             )
 
@@ -159,7 +158,7 @@ class BrandResponseGenerator:
                 f"Dear {author_name},\n\n"
                 f"Thank you for taking the time to provide your feedback regarding our services. We continuously evaluate all "
                 f"customer input to refine our technology, operational workflows, and service delivery standards.\n\n"
-                f"Should you have additional details or suggestions to share, please feel free to reach out to our team at contact@cynbit.in.\n\n"
+                f"Should you have additional details or suggestions to share, please feel free to reach out to our team at contact@revio-intel.ai.\n\n"
                 f"Sincerely,\n{sign_off_name}"
             )
 
