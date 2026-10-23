@@ -1,186 +1,90 @@
-# ⚙️ Technical Approach Report: Revio-Intelligence Architecture
+# Technical Approach Report: Revio Intelligence
 
 **Author:** Pritam Gangurde  
-**Specialization:** AI/ML Engineering  
-**System:** Revio Intelligence Multi-Tiered Architecture  
+**System:** Multi-Tier Review Intelligence & Escalation Architecture  
 **Date:** October 2026  
 
 ---
 
-## 1. System Architecture & High-Level Design
+### 1. Architecture Overview
 
-The **Revio-Intelligence Engine** is engineered as a high-throughput, microservices-ready AI intelligence layer designed to integrate directly with multi-tenant SaaS platforms and client-facing CRM/omnichannel pipelines.
+Revio Intelligence is designed as an asynchronous microservice that sits between omnichannel review sources (webhooks, API pollers) and internal communication tools (Slack, CRM, support ticketing).
 
-### End-to-End System Data Flow
-
-```mermaid
-flowchart TD
-    subgraph INGESTION["1. Omnichannel Ingestion Layer"]
-        A1["Google Business Profile Webhook"]
-        A2["Trustpilot / G2 Webhooks"]
-        A3["App Store / Mobile Reviews"]
-        A4["Batch CSV / REST API Ingestion"]
-    end
-
-    subgraph PREPROCESS["2. High-Speed Preprocessing"]
-        B1["Text Normalization & Emoji Filter"]
-        B2["Sentence & Contrastive Clause Tokenizer"]
-    end
-
-    subgraph ENGINE["3. Revio-Intelligence Hybrid Core"]
-        C1["Aspect-Based Sentiment Mining (ABSA)"]
-        C2["Probabilistic Urgency & Crisis Scorer"]
-        C3["Churn Probability Estimator"]
-        C4["Departmental Routing Engine"]
-    end
-
-    subgraph DISPATCH["4. Guardrail & Action Dispatcher"]
-        D1{"Crisis or Urgency >= 65?"}
-        D2["Automated Brand-Aligned Response Dispatch"]
-        D3["Human-in-the-Loop Gate (Executive Review)"]
-        D4["Slack / PagerDuty / Webhook Alert"]
-    end
-
-    INGESTION --> PREPROCESS
-    PREPROCESS --> ENGINE
-    ENGINE --> DISPATCH
-    D1 -- "No (Safe)" --> D2
-    D1 -- "Yes (High Risk)" --> D3
-    D1 -- "Yes (High Risk)" --> D4
+```
+[Review Ingestion]
+Google / Trustpilot / G2 / App Store
+       │
+       ▼
+[Preprocessing & Normalization]
+Tokenization & Contrastive Clause Splitting (", but", "however")
+       │
+       ▼
+[Intelligence Core]
+├── Aspect-Based Sentiment Analysis (ABSA) -> Department Tagging
+├── Urgency & Crisis Scorer (0 - 100)
+└── Churn Risk Classification (Low / Medium / High)
+       │
+       ▼
+[Response & Action Routing]
+├── Urgency < 65: Automated brand-aligned reply draft
+└── Urgency >= 65: Human-in-the-loop review queue + Slack/PagerDuty alert
 ```
 
 ---
 
-## 2. Model Selection & Algorithmic Tradeoffs
+### 2. Model & Algorithmic Strategy
 
-A common pitfall in modern AI engineering is over-reliance on slow, expensive cloud LLM APIs for tasks that require sub-10ms deterministic execution. We adopted a **Hybrid Multi-Tiered AI Architecture** balancing latency, cost, and contextual reasoning:
+Instead of routing every single review to an expensive, high-latency LLM API call (which costs money and takes 500-1500ms per request), the architecture uses a hybrid approach:
 
-| Architectural Tier | Model Candidate | Primary Task | Latency | Cost per 10K Reviews | Selected Strategy |
-| :--- | :--- | :--- | :---: | :---: | :--- |
-| **Tier 1: High-Speed Edge / Heuristic Filter** | Fast Lexicon Tokenizer & Regex Automata | Immediate crisis keyword scanning, clause contrastive splitting, baseline valence | **< 2ms** | **$0.00** | **Deterministic Core**: Guarantees zero latency and 100% offline uptime. |
-| **Tier 2: Aspect-Based Sentiment Mining** | Fine-tuned `DeBERTa-v3-small` / `BART-MNLI` Zero-Shot | Aspect-sentence cross-attention, granular polarity scoring (-1.0 to +1.0) | **15–25ms** (CPU/GPU) | **~$0.12** (Compute) | **Hybrid Core**: Fast rule-based ABSA with seamless hook for DeBERTa ONNX runtime. |
-| **Tier 3: Contextual Brand Response Generator** | Llama-3-8B-Instruct (via Groq) / Claude 3.5 Sonnet / OpenAI GPT-4o-mini | Tone-matched public response drafting with dynamic brand persona injection | **300–600ms** | **~$0.60** | **Pluggable Engine**: Deterministic template synthesizer with direct LLM API adapter. |
+1. **Fast Rule-Based / Lexicon ABSA (Tier 1):**
+   - Runs locally in `< 5ms` with zero GPU requirements.
+   - Accurately parses sentences, extracts contrastive clauses, and maps keywords to five core business domains:
+     - Customer Support (`support`, `ticket`, `helpdesk`, `response time`)
+     - Pricing & Billing (`price`, `billing`, `refund`, `chargeback`, `fee`)
+     - Reliability & Uptime (`outage`, `crash`, `down`, `server`, `leak`, `bug`)
+     - Product Features (`features`, `dashboard`, `tool`, `automation`, `api`)
+     - Ease of Use (`clean`, `intuitive`, `confusing`, `hard to navigate`)
+   - Provides a direct drop-in interface for fine-tuned transformer models (`DeBERTa-v3-small` / ONNX runtime) when scale demands it.
 
-### Architectural Tradeoff Rationale:
-1. **Zero Cold-Start Latency:** By implementing the core ABSA and Crisis engine in clean Python with vector-optimized math (`math.tanh`, compiled regex automata), reviews are processed in under 5ms, allowing the system to handle thousands of concurrent webhook events without expensive GPU clusters.
-2. **Defensive Governance:** Generative LLMs can hallucinate or make legally binding admissions (e.g., admitting fault in a public data breach). Our architecture enforces strict **deterministic guardrails** that intercept any critical trigger before generation occurs.
+2. **Heuristic Urgency Engine (Tier 2):**
+   - Calculates a risk score between 0 and 100 using rating weight, negative sentiment intensity, and high-risk regex triggers:
+     - Data leaks, security vulnerabilities (+40 weight)
+     - Legal threats, chargebacks, fraud allegations (+45 weight)
+     - Immediate churn / contract cancellation threats (+35 weight)
+     - Multi-hour server outages (+30 weight)
+   - Triggers an automatic SLA categorization:
+     - Tier 1: Urgent (< 1 hour) - Escalated to leadership
+     - Tier 2: High (< 4 hours) - Escalated to senior support / ops
+     - Tier 3: Standard (< 24 hours) - Normal queue
+     - Tier 4: Routine - Auto-replied or batched
 
----
-
-## 3. Data Pipeline & Omnichannel Ingestion
-
-### 3.1 Preprocessing & Contrastive Clause Splitting
-Standard sentence tokenizers fail when customers write compound reviews such as:
-> *"The UI dashboard is clean and easy to navigate, **but** pricing is very expensive and customer support took days to answer."*
-
-If analyzed as a single unit, positive and negative sentiments cancel out, masking critical product flaws. Our tokenizer implements **contrastive clause decomposition**:
-- Identifies contrastive conjunction boundaries (`", but "`, `"; "`, `" however, "`, `" although "`, `" whereas "`).
-- Isolates clause A: *"The UI dashboard is clean and easy to navigate"* -> Mapped to **Ease of Use & UX** (Valence: `+0.76`, Sentiment: `Positive`).
-- Isolates clause B: *"pricing is very expensive"* -> Mapped to **Pricing & Billing** (Valence: `-0.82`, Sentiment: `Negative`).
-- Isolates clause C: *"customer support took days to answer"* -> Mapped to **Customer Support** (Valence: `-0.65`, Sentiment: `Negative`).
-
-### 3.2 Departmental Aspect Taxonomy
-The engine structures sentiment across five critical enterprise dimensions:
-
-```
-[Aspect Taxonomy]
-├── Customer Support ──────────────> Target: Customer Success & Operations
-├── Pricing & Billing ─────────────> Target: Finance & Account Management
-├── System Reliability & Performance > Target: Core Infrastructure & DevOps
-├── Product Quality & Features ────> Target: Product & Engineering
-└── Ease of Use & UX ──────────────> Target: UI/UX & Design Leads
-```
+3. **Response Drafting with Safety Guardrails (Tier 3):**
+   - Synthesizes responses based on selected brand voice (Empathetic, Professional, Warm, or Executive Escalation).
+   - If a review has an urgency score $\ge 65$ or contains legal/security triggers, the engine **locks auto-publishing** and sets `human_review_required = True`.
+   - Ensures the company does not inadvertently admit legal liability or make unauthorized refund promises publicly.
 
 ---
 
-## 4. Crisis Scoring & Churn Risk Mathematical Formulation
+### 3. Handling Mixed Reviews (Contrastive Clauses)
 
-The urgency score $U \in [0, 100]$ is calculated dynamically to reflect brand risk, customer churn probability, and regulatory compliance exposure:
+A major failure point of off-the-shelf sentiment models is compound sentences:
+> *"The app UI is clean and easy to use, **but** pricing is very expensive and customer support took days to answer."*
 
-$$U = \min\left(100, \max\left(0, W_{\text{rating}} + W_{\text{sentiment}} + \sum_{i=1}^{k} W_{\text{trigger}, i}\right)\right)$$
+If analyzed as a single string:
+- Positive tokens (`clean`, `easy`) cancel out negative tokens (`expensive`, `took days`).
+- The review gets classified as "Neutral", and the product team never learns that customer support or billing has issues.
 
-Where:
-- **Rating Weight ($W_{\text{rating}}$):**
-  - Rating = 1 Star: $+40$
-  - Rating = 2 Stars: $+25$
-  - Rating = 3 Stars: $+10$
-  - Rating $\ge$ 4 Stars: $0$
-- **Sentiment Polarity Weight ($W_{\text{sentiment}}$):**
-  - Overall Sentiment Score $< -0.5$: $+25$
-  - Overall Sentiment Score $< -0.1$: $+15$
-  - Otherwise: $0$
-- **Crisis Trigger Weights ($\sum W_{\text{trigger}}$):**
-  - `Security Threat` (Credentials leak, vulnerability, breach): $+40$ (Forces Crisis = True)
-  - `Legal / Fraud Risk` (Lawsuit, fraud, scam, sue, regulator): $+45$ (Forces Crisis = True)
-  - `Billing Dispute` (Double-charged, chargeback, refund refusal): $+35$
-  - `High Churn Risk` (Terminate contract, switching to competitor, cancel): $+35$
-  - `Severe Outage` (Downtime $> 4$ hours, lost data, system unreachable): $+30$
-  - `Severe Dissatisfaction` (Unacceptable, disaster, horrible): $+20$
-
-### Automated SLA Escalation Matrix:
-- **Tier 1 Critical ($U \ge 80$ or Security/Legal Flag):** SLA $< 1\text{ Hour}$ -> Immediate PagerDuty/Slack alert to Executive Leadership & Legal. Auto-response locked behind Human Gate.
-- **Tier 2 High ($55 \le U < 80$):** SLA $< 4\text{ Hours}$ -> Routed to Senior Support Lead & Product Engineering.
-- **Tier 3 Normal ($30 \le U < 55$):** SLA $< 24\text{ Hours}$ -> Routed to Customer Support queue.
-- **Tier 4 Automated ($U < 30$):** Instant -> Autonomous brand-aligned response dispatched automatically.
+Our preprocessor splits text into clauses using contrastive markers (`", but "`, `"; "`, `" however, "`, `" although "`). Each clause is scored independently and assigned to its corresponding department:
+- Clause 1: *"The app UI is clean and easy to use"* -> UI/UX (Positive)
+- Clause 2: *"pricing is very expensive"* -> Billing (Negative)
+- Clause 3: *"customer support took days to answer"* -> Support (Negative)
 
 ---
 
-## 5. Prompt Engineering & Response Generation Architecture
+### 4. Cloud Deployment Architecture
 
-### 5.1 Persona Design
-Responses are dynamically generated using four brand voice archetypes:
-1. **Empathetic & Resolution-Oriented:** For negative reviews with specific feature/support pain points. Acknowledges emotion, avoids defensive language, and provides a direct path to resolution.
-2. **Corporate & Professional:** For neutral or enterprise-tier inquiries. Clear, concise, and structured.
-3. **Warm & Enthusiastic:** For 5-star positive testimonials. Celebrates customer advocacy and reinforces brand loyalty.
-4. **Executive Priority Escalation:** For critical incidents ($U \ge 70$). Professional ownership, strict neutral phrasing, avoids admitting premature legal liability, and routes to `priority@revio-intel.ai`.
-
-### 5.2 Safety Guardrails & Human-in-the-Loop Protocol
-```
-[Generated Response Draft]
-         │
-         ▼
-[Guardrail Safety Inspector]
- ├── Check 1: Does Urgency >= 65 or is Crisis True?
- ├── Check 2: Does text contain legal / security claims?
- ├── Check 3: Does response commit to financial compensation without approval?
-         │
-    ┌────┴──────────────────────────┐
-    ▼                               ▼
-[Safe]                     [Human Review Required]
-Auto-publish to G2/Google   Held in Moderation Queue
-                            Internal Ticket sent to Slack
-```
-
----
-
-## 6. Execution Plan & Production Deployment on AWS/Azure
-
-The Revio-Intelligence Engine is architected for zero-friction containerized deployment on cloud infrastructure:
-
-```mermaid
-flowchart LR
-    subgraph CLIENT["Client Endpoints"]
-        UI["Review Dashboard (React/Streamlit)"]
-        WEBHOOK["Review Webhooks (Google/G2/Trustpilot)"]
-    end
-
-    subgraph CLOUD["Cloud Infrastructure (AWS / Azure)"]
-        ALB["Application Load Balancer"]
-        API["FastAPI Cluster (ECS Fargate / Docker)"]
-        REDIS["Redis Broker & Celery Queue"]
-        DB["PostgreSQL (Tenant & Review Storage)"]
-        LLM["Inference Gateway (Groq / vLLM / Bedrock)"]
-    end
-
-    CLIENT --> ALB
-    ALB --> API
-    API --> REDIS
-    API --> DB
-    REDIS --> LLM
-```
-
-### Production Milestone Roadmap:
-- **Phase 1 (Containerization & Ingestion):** Package FastAPI backend into Docker image; deploy to AWS ECS Fargate with auto-scaling (1 to 10 tasks based on CPU/Request count).
-- **Phase 2 (Database Integration):** Connect multi-tenant PostgreSQL schema (`tenants`, `reviews`, `aspect_scores`, `escalation_tickets`).
-- **Phase 3 (Webhook Connectors):** Implement OAuth2 and Webhook sync for Google Business Profile, Trustpilot, and G2.
-- **Phase 4 (Enterprise SLA & Observability):** Deploy Prometheus and Grafana dashboards tracking review sentiment drift, mean time to resolve (MTTR) for high-urgency incidents, and response generation throughput.
+- **Service Framework:** FastAPI running behind Uvicorn / Gunicorn.
+- **Containerization:** Standard Docker image (`python:3.11-slim`), stateless design for horizontal scaling on AWS ECS Fargate or Azure Container Apps.
+- **Message Broker:** Redis / Celery for handling high-volume spikes of webhook reviews.
+- **Database:** PostgreSQL for storing reviews, aspect breakdowns, and review resolution logs.
+- **Monitoring:** Prometheus metrics tracking latency, aspect sentiment distribution, and number of daily high-urgency escalations.
